@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import * as API from 'api';
-import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
-import { ImageGallery } from './ImageGallery/ImageGallery';
-import { Searchbar } from './Searchbar/Searchbar';
+// // import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
+// // import { ImageGallery } from './ImageGallery/ImageGallery';
+import  Searchbar  from './Searchbar/Searchbar';
 
 export default class App extends Component {
   state = {
@@ -15,14 +15,12 @@ export default class App extends Component {
     totalPages: null,
   };
 
-  async componentDidMount() {
-    // const images = await API.getImages();
-    // this.setState({ images });
+  componentDidMount() {
 
     fetch('https://pixabay.com/api/')
       .then(res => res.json())
       .then(searchName => this.setState({ searchName }))
-      .finally(() => this.setState({ loading: false}));
+      .finally(() => this.setState({ isLoading: false}));
     
   }
 
@@ -45,11 +43,11 @@ export default class App extends Component {
     });
   };
 
-  addImagesGalleryItem = async values => {
+  addImagesItem = async values => {
 
     try {
       this.setState({ isLoading: true });
-      const images = await API.addImagesGalleryItem(values);
+      const images = await API.addImagesItem(values);
       this.setState(state => ({
         images: [...state.images, images],
         isLoading: false,
@@ -59,14 +57,15 @@ export default class App extends Component {
   }
 
   render() {
-    const { searchName } = this.state;
+    // const { searchName } = this.state;
 
     return (
        
       <>
-        <GlobalStyle />
-        <ImageGallery onSubmit={this.addImagesGalleryItem} />
-        <ImageGalleryItem items={searchName} />
+        <GlobalStyle /> 
+        {this.state.searchName && <div>Evgeniia</div>}
+        {/* <ImageGallery onSubmit={this.addImagesGalleryItem} />
+        <ImageGalleryItem items={searchName} /> */}
         <Searchbar onSubmit={this.handleSubmit} />
        </>   
         //  {/*  */}
