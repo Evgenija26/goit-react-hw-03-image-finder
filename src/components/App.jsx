@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import * as API from 'api';
-// // import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 import  ImageGallery  from './ImageGallery/ImageGallery';
-import  Searchbar  from './Searchbar/Searchbar';
+import Searchbar from './Searchbar/Searchbar';
+import  Button  from './Button/Button';
 
 export default class App extends Component {
   state = {
@@ -33,21 +33,24 @@ export default class App extends Component {
     }
   }
 
+  loadMore = () => {
+    this.setState(prevState => ({
+      page: prevState.page + 1,
+    }));
+  };
 
-  handleSubmit = searchName => {
+  handleSubmit = e => {
     this.setState({
-  
-      searchName: searchName,
+      searchName: e.target.elements.searchName.value,
       images: [],
       currentPage: 1,
     });
   };
 
-  addImagesItem = async values => {
-
+  addImages = async values => {
     try {
       this.setState({ isLoading: true });
-      const images = await API.addImagesItem(values);
+      const images = await API.addImages(values);
       this.setState(state => ({
         images: [...state.images, images],
         isLoading: false,
@@ -63,15 +66,16 @@ export default class App extends Component {
        
       <>
         <GlobalStyle /> 
-        {this.state.searchName && <div>Evgeniia</div>}
-        <ImageGallery onSubmit={this.addImagesItem} />
+       
+        <ImageGallery onSubmit={this.addImages} />
         {/* <ImageGalleryItem items={searchName} />  */}
         <Searchbar onSubmit={this.handleSubmit} />
+        <Button onClick={this.loadMore} />
        </>   
         //  {/*  */}
         // {/*  */}
       // <Loader />
-      // <Button />
+      // 
       // <Modal />  
     )
     
@@ -82,5 +86,5 @@ export default class App extends Component {
 // 
 // import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 // import { Loader } from './Loader/Loader';
-// import { Button } from './Button/Button';
+// 
 // import { Modal } from './Modal/Modal';
