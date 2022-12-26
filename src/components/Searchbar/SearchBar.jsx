@@ -5,8 +5,11 @@ import  css  from "./Searchbar.module.css";
 import React from 'react'
 
 
-const Searchbar = ({ images, setSearchResults }) => {
-    const handleSubmit = (e) => e.preventDefault()
+const Searchbar = ({ images, setSearchResults, onSubmit }) => {
+    const handleSubmit = (values, actions) => {
+        onSubmit(values);
+        actions.resetForm();
+    }
 
     const handleSearchChange = (e) => {
         if (!e.target.value) return setSearchResults(images)
