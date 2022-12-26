@@ -1,13 +1,12 @@
 import React from "react";
 import css from "./ImageItem.module.css";
 
-export const ImageItem = ({ link, tags, onClick }) => {
+export const ImageItem = ({ images, items, link, tags, onClick }) => {
   return (
   <>
       {images && items.map(item => (
-    
         <li key={item.id} className={css.ImageItem}>
-          <Image src={link} alt={tags} onClick={onClick} className={css.ImageItem-image} />
+          <image src={link} alt={tags} onClick={onClick} className={css.ImageItem__image} />
         </li>
       ))}
   </>
@@ -15,9 +14,8 @@ export const ImageItem = ({ link, tags, onClick }) => {
   );
 };
 
-{/* <li class="gallery-item">
-  <img src="" alt="" />
-</li> */}
+export default ImageItem
+
 
 
 

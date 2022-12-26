@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import * as API from 'api';
 // // import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
-// // import { ImageGallery } from './ImageGallery/ImageGallery';
+import  ImageGallery  from './ImageGallery/ImageGallery';
 import  Searchbar  from './Searchbar/Searchbar';
 
 export default class App extends Component {
@@ -64,8 +64,8 @@ export default class App extends Component {
       <>
         <GlobalStyle /> 
         {this.state.searchName && <div>Evgeniia</div>}
-        {/* <ImageGallery onSubmit={this.addImagesGalleryItem} />
-        <ImageGalleryItem items={searchName} /> */}
+        <ImageGallery onSubmit={this.addImagesItem} />
+        {/* <ImageGalleryItem items={searchName} />  */}
         <Searchbar onSubmit={this.handleSubmit} />
        </>   
         //  {/*  */}
