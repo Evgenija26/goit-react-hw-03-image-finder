@@ -5,24 +5,17 @@ import  css  from "./Searchbar.module.css";
 import React from 'react'
 
 
-const Searchbar = ({ images, setSearchResults, onSubmit }) => {
-    const handleSubmit = (values, actions) => {
-        onSubmit(values);
-        actions.resetForm();
-    }
-
-    const handleSearchChange = (e) => {
-        if (!e.target.value) return setSearchResults(images)
-
-        const resultsArray = images.filter(image => image.title.includes(e.target.value) || image(e.target.value))
-        
-        setSearchResults(resultsArray)
+const Searchbar = ({  onSubmit }) => {
+    const handleSubmit = e => {
+        e.preventDefault();
+        onSubmit(e.target.elements.searchName.value);
+        e.target.reset();
     }
 
   return (
       <header className={css.Searchbar}>
           <form className={css.SearchForm} onSubmit={handleSubmit}>
-              <input className={css.SearchFormInput} type='text' id='search' onChange={handleSearchChange} />
+              <input className={css.SearchFormInput} name='searchName' type='text' id='search'  />
               <button className={css.SearchFormButton} >
                   <BiSearchAlt />
               </button>

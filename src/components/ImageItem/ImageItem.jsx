@@ -1,14 +1,16 @@
 import React from "react";
 import css from "./ImageItem.module.css";
 
-export const ImageItem = ({ images, items, link, tags, onClick }) => {
+export const ImageItem = ({ image, onClick }) => {
   return (
   <>
-      {images && items.map(item => (
-        <li key={item.id} className={css.ImageItem}>
-          <image src={link} alt={tags} onClick={onClick} className={css.ImageItem__image} />
+        <li  className={css.ImageItem}>
+        <img
+          src={image.webformatURL}
+          alt={image.tags}
+          // onClick={onClick}
+          className={css.ImageItem__image} />
         </li>
-      ))}
   </>
     
   );

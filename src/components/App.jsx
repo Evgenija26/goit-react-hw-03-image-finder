@@ -12,24 +12,15 @@ export default class App extends Component {
     currentPage: 1,
     error: null,
     isLoading: false,
-    totalPages: null,
+    totalPages: 0,
   };
-
-  componentDidMount() {
-
-    fetch('https://pixabay.com/api/')
-      .then(res => res.json())
-      .then(searchName => this.setState({ searchName }))
-      .finally(() => this.setState({ isLoading: false}));
-    
-  }
 
   componentDidUpdate(_, prevState) {
     if (
       prevState.searchName !== this.state.searchName ||
       prevState.currentPage !== this.state.currentPage
     ) {
-      this.showImages();
+      this.addImages();
     }
   }
 
@@ -39,24 +30,31 @@ export default class App extends Component {
     }));
   };
 
-  handleSubmit = e => {
+  handleSubmit = query => {
     this.setState({
-      searchName: e.target.elements.searchName.value,
+      searchName: query,
       images: [],
       currentPage: 1,
     });
   };
 
   addImages = async values => {
+    const { searchName, currentPage } = this.state;
     try {
       this.setState({ isLoading: true });
-      const images = await API.addImages(values);
+      const data = await API.getImages(searchName, currentPage);
       this.setState(state => ({
-        images: [...state.images, images],
+        images: [...state.images, ...data.hits],
         isLoading: false,
+        error: '',
+        totalPages: Math.ceil(data.totalHits / 12)
       }));
 
-    } catch (error) {};
+    } catch (error) {
+      this.setState({ error: 'something went wrong'})
+     } finally {
+      this.setState({ isLoading: false });
+    }
   }
 
   render() {
@@ -66,10 +64,10 @@ export default class App extends Component {
        
       <>
         <GlobalStyle /> 
-       
-        <ImageGallery onSubmit={this.addImages} />
+       <Searchbar onSubmit={this.handleSubmit} />
+        <ImageGallery images={this.state.images} />
         {/* <ImageGalleryItem items={searchName} />  */}
-        <Searchbar onSubmit={this.handleSubmit} />
+        
         <Button onClick={this.loadMore} />
        </>   
         //  {/*  */}
