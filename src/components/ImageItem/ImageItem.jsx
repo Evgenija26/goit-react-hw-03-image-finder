@@ -23,7 +23,7 @@ export default class ImageItem extends Component {
         <img
           src={image.webformatURL}
           alt={image.tags}
-          onModalClick={this.toggleModal}
+          onClick={this.toggleModal}
           className={css.ImageItem__image} />
         {showModal && <Modal modalUrl={largeImageUrl} onModalClick={this.toggleModal} />}
         </li>

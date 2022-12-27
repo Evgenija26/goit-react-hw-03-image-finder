@@ -1,5 +1,5 @@
 import React from 'react'
-import { BiSearchAlt } from "react-icons/bi";
+// import { BiSearchAlt } from "react-icons/bi";
 import  css  from "./SearchBar.module.css";
 
 const Searchbar = ({ onSubmit }) => {
@@ -14,7 +14,7 @@ const Searchbar = ({ onSubmit }) => {
           <form className={css.SearchForm} onSubmit={handleSubmit}>
               <input className={css.SearchFormInput} name='searchName' type='text' id='search'  />
               <button className={css.SearchFormButton} >
-                  <BiSearchAlt />
+                  {/* <BiSearchAlt /> */}
               </button>
           </form>
     </header>
