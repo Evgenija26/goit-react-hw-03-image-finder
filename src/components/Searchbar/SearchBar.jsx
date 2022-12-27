@@ -1,27 +1,39 @@
-import React from 'react'
-// import { BiSearchAlt } from "react-icons/bi";
+import React, { Component} from 'react'
+import { BiSearchAlt } from "react-icons/bi";
 import  css  from "./SearchBar.module.css";
 
-const Searchbar = ({ onSubmit }) => {
-    const handleSubmit = e => {
+export default class Searchbar extends Component {
+  state = {
+    searchName: '',
+    };
+    
+    handleSubmit = e => {
         e.preventDefault();
-        onSubmit(e.target.elements.searchName.value);
+         this.props.onSubmit(e.target.elements.searchName.value);
+        // onSubmit(e.target.elements.searchName.value);
         e.target.reset();
+    };
+
+    render() {
+
+        return (
+            <header className={css.SearchBar}>
+                <form className={css.SearchForm} onSubmit={this.handleSubmit}>
+                    <input className={css.SearchFormInput} name='searchName' type='text' id='search' />
+                    <button className={css.SearchFormButton} >
+                        <BiSearchAlt />
+                    </button>
+                </form>
+            </header>
+        );
+
+  
     }
 
-  return (
-      <header className={css.SearchBar}>
-          <form className={css.SearchForm} onSubmit={handleSubmit}>
-              <input className={css.SearchFormInput} name='searchName' type='text' id='search'  />
-              <button className={css.SearchFormButton} >
-                  {/* <BiSearchAlt /> */}
-              </button>
-          </form>
-    </header>
-  )
+
 }
 
-export default Searchbar
+// export default Searchbar
 
 
 
