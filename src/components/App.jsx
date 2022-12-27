@@ -4,7 +4,6 @@ import * as API from 'api';
 import  ImageGallery  from './ImageGallery/ImageGallery';
 import SearchBar from './SearchBar/SearchBar';
 import  Button  from './Button/Button';
-import Modal from './Modal/Modal';
 
 export default class App extends Component {
   state = {
@@ -14,7 +13,7 @@ export default class App extends Component {
     error: null,
     isLoading: false,
     totalPages: 0,
-    showModal: false,
+    
   };
 
   componentDidUpdate(_, prevState) {
@@ -28,7 +27,7 @@ export default class App extends Component {
 
   loadMore = () => {
     this.setState(prevState => ({
-      page: prevState.page + 1,
+      currentPage: prevState.currentPage + 1,
     }));
   };
 
@@ -59,14 +58,11 @@ export default class App extends Component {
     }
   };
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
-  };
+ 
+
 
   render() {
-     const { showModal } = this.state;
+     const { images, isLoading, currentPage, totalPages } = this.state;
 
     return (
        
@@ -74,13 +70,17 @@ export default class App extends Component {
         <GlobalStyle /> 
         <SearchBar onSubmit={this.handleSubmit} />
         <ImageGallery images={this.state.images} />
-        <Button onClick={this.loadMore} />
-        {showModal && <Modal onClose={this.toggleModal} />}
+        
+        {images.length > 0 && totalPages !== currentPage && !isLoading && (
+          <Button onClick={this.loadMore} />
+        )}
+        {/* <Button onClick={this.loadMore} /> */}
+        {/* {images.length !== 0 && <Button onClick={this.loadMore} />} */}
+        
        </>   
       
       // <Loader />
-   
-      // <Modal />  
+  
     )
     
   }
@@ -88,5 +88,3 @@ export default class App extends Component {
 };
 
 // import { Loader } from './Loader/Loader';
-// 
-// import { Modal } from './Modal/Modal';

@@ -25,27 +25,16 @@ export default class Modal extends Component {
     }
   }
   
-
   render() {
+    const { largeImageUrl, tags } = this.props;
+    
     return createPortal(
       <div className="Modal__backdrop" onClick={this.handleBackdropClick}>
         <div className="Modal__content">
-          <img src={largeImage} alt={type} />
+          <img src={largeImageUrl} alt={tags} />
         </div>
       </div>,
       modalRoot,
     );
   }
 }
-
-// Modal.setAppElement('#root');
-
-// export const ImageModal = ({ isOpen, img, onClose }) => {
-//   return (
-//     <Modal isOpen={isOpen} onRequestClose={onClose} style={css.Modal}>
-//       <button onClick={onClose}>Close</button>
-//       <div>Image modal</div>
-//       <img src={img} alt="" />
-//     </Modal>
-//   );
-// };

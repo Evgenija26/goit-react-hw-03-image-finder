@@ -1,10 +1,10 @@
 import React from 'react'
 import css  from './Button.module.css'
 
-const Button = () => {
+const Button = ({onClick}) => {
   return (
-      <div>
-          <button type="button" data-action="load-more" className={css.Button}>
+      <div className={css.btn__wrapper}>
+          <button type="button" className={css.Button} onClick={onClick}>
               Load more
           </button>
     </div>

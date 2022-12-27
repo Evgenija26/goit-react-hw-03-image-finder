@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     
+    
     padding: 8px 16px;
     border-radius: 2px;
     background-color: #9ca0b6;
@@ -32,4 +33,5 @@
 .btn__wrapper{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
