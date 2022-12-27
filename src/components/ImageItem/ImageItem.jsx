@@ -8,7 +8,7 @@ export const ImageItem = ({ image, onClick }) => {
         <img
           src={image.webformatURL}
           alt={image.tags}
-          // onClick={onClick}
+          onClick={onClick}
           className={css.ImageItem__image} />
         </li>
   </>

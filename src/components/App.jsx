@@ -4,6 +4,7 @@ import * as API from 'api';
 import  ImageGallery  from './ImageGallery/ImageGallery';
 import SearchBar from './SearchBar/SearchBar';
 import  Button  from './Button/Button';
+import Modal from './Modal/Modal';
 
 export default class App extends Component {
   state = {
@@ -13,6 +14,7 @@ export default class App extends Component {
     error: null,
     isLoading: false,
     totalPages: 0,
+    showModal: false,
   };
 
   componentDidUpdate(_, prevState) {
@@ -51,14 +53,20 @@ export default class App extends Component {
       }));
 
     } catch (error) {
-      this.setState({ error: 'something went wrong'})
-     } finally {
+      this.setState({ error: 'something went wrong' })
+    } finally {
       this.setState({ isLoading: false });
     }
-  }
+  };
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
 
   render() {
-    // const { searchName } = this.state;
+     const { showModal } = this.state;
 
     return (
        
@@ -67,6 +75,7 @@ export default class App extends Component {
         <SearchBar onSubmit={this.handleSubmit} />
         <ImageGallery images={this.state.images} />
         <Button onClick={this.loadMore} />
+        {showModal && <Modal onClose={this.toggleModal} />}
        </>   
       
       // <Loader />

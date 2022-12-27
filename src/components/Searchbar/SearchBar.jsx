@@ -2,7 +2,7 @@ import React from 'react'
 import { BiSearchAlt } from "react-icons/bi";
 import  css  from "./SearchBar.module.css";
 
-const Searchbar = ({  onSubmit }) => {
+const Searchbar = ({ onSubmit }) => {
     const handleSubmit = e => {
         e.preventDefault();
         onSubmit(e.target.elements.searchName.value);
