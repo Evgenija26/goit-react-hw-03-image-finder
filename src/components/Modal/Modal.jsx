@@ -5,6 +5,9 @@ import {createPortal} from 'react-dom'
 const modalRoot = document.querySelector('#modal-root');
 
 export default class Modal extends Component {
+  state = {
+    largeImageUrl: '',
+  }
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }

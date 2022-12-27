@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import * as API from 'api';
-import  ImageGallery  from './ImageGallery/ImageGallery';
+import ImageGallery from './ImageGallery/ImageGallery';
 import SearchBar from './SearchBar/SearchBar';
 import  Button  from './Button/Button';
 
