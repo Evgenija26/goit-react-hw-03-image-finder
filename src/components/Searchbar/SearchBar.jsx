@@ -10,7 +10,7 @@ const Searchbar = ({  onSubmit }) => {
     }
 
   return (
-      <header className={css.Searchbar}>
+      <header className={css.SearchBar}>
           <form className={css.SearchForm} onSubmit={handleSubmit}>
               <input className={css.SearchFormInput} name='searchName' type='text' id='search'  />
               <button className={css.SearchFormButton} >
