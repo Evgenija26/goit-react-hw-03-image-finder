@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import * as API from 'api';
 import  ImageGallery  from './ImageGallery/ImageGallery';
-import Searchbar from './Searchbar/Searchbar';
+import SearchBar from './SearchBar/SearchBar';
 import  Button  from './Button/Button';
 
 export default class App extends Component {
@@ -64,16 +64,13 @@ export default class App extends Component {
        
       <>
         <GlobalStyle /> 
-       <Searchbar onSubmit={this.handleSubmit} />
+        <SearchBar onSubmit={this.handleSubmit} />
         <ImageGallery images={this.state.images} />
-        {/* <ImageGalleryItem items={searchName} />  */}
-        
         <Button onClick={this.loadMore} />
        </>   
-        //  {/*  */}
-        // {/*  */}
+      
       // <Loader />
-      // 
+   
       // <Modal />  
     )
     
@@ -81,8 +78,6 @@ export default class App extends Component {
  
 };
 
-// 
-// import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 // import { Loader } from './Loader/Loader';
 // 
 // import { Modal } from './Modal/Modal';
