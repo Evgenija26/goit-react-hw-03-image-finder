@@ -15,7 +15,7 @@ export default class ImageItem extends Component {
 
   render() {
     const { showModal } = this.state;
-    const { largeImageUrl, image } = this.props;
+    const { image } = this.props;
 
     return (
         <>
@@ -24,8 +24,8 @@ export default class ImageItem extends Component {
           src={image.webformatURL}
           alt={image.tags}
           onClick={this.toggleModal}
-          className={css.ImageItem__image} />
-        {showModal && <Modal modalUrl={largeImageUrl} onModalClick={this.toggleModal} />}
+          className={css.ImageGalleryItem__image} />
+        {showModal && <Modal largeImageURL={image.largeImageURL} tags={image.tags} onClose={this.toggleModal} />}
         </li>
       </>
     )

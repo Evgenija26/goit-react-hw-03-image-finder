@@ -8,6 +8,7 @@ export default class Searchbar extends Component {
     };
     
     handleSubmit = e => {
+        
         e.preventDefault();
          this.props.onSubmit(e.target.elements.searchName.value);
         // onSubmit(e.target.elements.searchName.value);

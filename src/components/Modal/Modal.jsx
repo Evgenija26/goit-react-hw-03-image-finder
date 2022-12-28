@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import {createPortal} from 'react-dom'
-// import css from './Modal.module.css'
+import css from './Modal.module.css'
 
 const modalRoot = document.querySelector('#modal-root');
 
 export default class Modal extends Component {
-  state = {
-    largeImageUrl: '',
-  }
+  
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }
@@ -29,12 +27,12 @@ export default class Modal extends Component {
   }
   
   render() {
-    const { largeImageUrl, tags } = this.props;
+    const { largeImageURL, tags } = this.props;
     
     return createPortal(
-      <div className="Modal__backdrop" onClick={this.handleBackdropClick}>
-        <div className="Modal__content">
-          <img src={largeImageUrl} alt={tags} />
+      <div className={css.Overlay} onClose={this.handleBackdropClick}>
+        <div className={css.Modal}>
+          <img src={largeImageURL} alt={tags}  />
         </div>
       </div>,
       modalRoot,

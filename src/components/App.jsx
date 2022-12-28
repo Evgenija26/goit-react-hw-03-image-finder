@@ -2,7 +2,8 @@ import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import * as API from 'api';
 import ImageGallery from './ImageGallery/ImageGallery';
-import SearchBar from './SearchBar/SearchBar';
+import SearchBar from './SearchForm/SearchBar';
+import Loader  from './Loader/Loader';
 import  Button  from './Button/Button';
 
 export default class App extends Component {
@@ -39,13 +40,21 @@ export default class App extends Component {
     });
   };
 
-  addImages = async values => {
+  addImages = async () => {
     const { searchName, currentPage } = this.state;
     try {
       this.setState({ isLoading: true });
       const data = await API.getImages(searchName, currentPage);
+
+      // if (data.hits.length === 0) {
+      //   alert('sorry image not found');
+      //   return;
+      // };
+
+      const normalizedImages = API.normalizedImages(data.hits);
+
       this.setState(state => ({
-        images: [...state.images, ...data.hits],
+        images: [...state.images, ...normalizedImages],
         isLoading: false,
         error: '',
         totalPages: Math.ceil(data.totalHits / 12)
@@ -58,10 +67,7 @@ export default class App extends Component {
     }
   };
 
- 
-
-
-  render() {
+   render() {
      const { images, isLoading, currentPage, totalPages } = this.state;
 
     return (
@@ -69,8 +75,8 @@ export default class App extends Component {
       <>
         <GlobalStyle /> 
         <SearchBar onSubmit={this.handleSubmit} />
-        <ImageGallery images={this.state.images} />
-        
+        {images.length > 0 && <ImageGallery images={images} />}
+        {isLoading && <Loader />}
         {images.length > 0 && totalPages !== currentPage && !isLoading && (
           <Button onClick={this.loadMore} />
         )}
@@ -87,4 +93,4 @@ export default class App extends Component {
  
 };
 
-// import { Loader } from './Loader/Loader';
+
