@@ -46,10 +46,10 @@ export default class App extends Component {
       this.setState({ isLoading: true });
       const data = await API.getImages(searchName, currentPage);
 
-      // if (data.hits.length === 0) {
-      //   alert('sorry image not found');
-      //   return;
-      // };
+      if (data.hits.length === 0) {
+        alert('sorry image not found');
+        return;
+      };
 
       const normalizedImages = API.normalizedImages(data.hits);
 
@@ -72,18 +72,21 @@ export default class App extends Component {
 
     return (
        
-      <>
+      <div className="App">
         <GlobalStyle /> 
         <SearchBar onSubmit={this.handleSubmit} />
-        {images.length > 0 && <ImageGallery images={images} />}
+        {images.length > 0 ? (
+          <ImageGallery images={images} />) : (
+          <p style={{ padding: 10, textAlign: 'center', fontSize: 20 }}>
+            Image gallery is empty
+          </p>
+        )}
         {isLoading && <Loader />}
         {images.length > 0 && totalPages !== currentPage && !isLoading && (
           <Button onClick={this.loadMore} />
         )}
-        {/* <Button onClick={this.loadMore} /> */}
-        {/* {images.length !== 0 && <Button onClick={this.loadMore} />} */}
         
-       </>   
+       </div>   
       
       // <Loader />
   
